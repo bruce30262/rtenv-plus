@@ -280,7 +280,7 @@ int regfile_event_release(struct event_monitor *monitor, int event,
     struct file *file = data;
     struct file_request *request = (void*)task->stack->r0;
 
-    switch (task->stack->r7) {
+    switch (task->stack->r8) {
         case 0x04:
             return file_read(file, request, monitor);
         case 0x03:
