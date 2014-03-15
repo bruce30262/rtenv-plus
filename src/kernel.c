@@ -21,15 +21,6 @@
 #include "event-monitor.h"
 #include "romfs.h"
 
-#define MAX_CMDNAME 19
-#define MAX_ARGC 19
-#define MAX_CMDHELP 1023
-#define HISTORY_COUNT 8
-#define CMDBUF_SIZE 64
-#define MAX_ENVCOUNT 16
-#define MAX_ENVNAME 15
-#define MAX_ENVVALUE 63
-
 /*Global Variables*/
 char next_line[3] = {'\n','\r','\0'};
 size_t task_count = 0;
@@ -53,17 +44,6 @@ void show_man_page(int argc, char *argv[]);
 void show_history(int argc, char *argv[]);
 void show_xxd(int argc, char *argv[]);
 
-/* Enumeration for command types. */
-enum {
-	CMD_ECHO = 0,
-	CMD_EXPORT,
-	CMD_HELP,
-	CMD_HISTORY,
-	CMD_MAN,
-	CMD_PS,
-	CMD_XXD,
-	CMD_COUNT
-} CMD_TYPE;
 /* Structure for command handler. */
 typedef struct {
 	char cmd[MAX_CMDNAME + 1];
@@ -80,11 +60,6 @@ const hcmd_entry cmd_data[CMD_COUNT] = {
 	[CMD_XXD] = {.cmd = "xxd", .func = show_xxd, .description = "Make a hexdump."},
 };
 
-/* Structure for environment variables. */
-typedef struct {
-	char name[MAX_ENVNAME + 1];
-	char value[MAX_ENVVALUE + 1];
-} evar_entry;
 evar_entry env_var[MAX_ENVCOUNT];
 int env_count = 0;
 
