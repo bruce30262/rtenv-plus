@@ -44,6 +44,13 @@ void show_man_page(int argc, char *argv[]);
 void show_history(int argc, char *argv[]);
 void show_xxd(int argc, char *argv[]);
 
+
+void *malloc(size_t size)
+{
+	static char m[256] = {0};
+	return m;
+}
+
 /* Structure for command handler. */
 typedef struct {
 	char cmd[MAX_CMDNAME + 1];
